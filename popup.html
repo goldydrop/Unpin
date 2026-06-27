@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+	<title>Unpin</title>
+	<style>
+		body {
+			font-family: 'Lato', sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #ffffff;
+			display: flex;
+			justify-content: center;
+			color: #111;
+			width: 300px;
+			transition: background-color 0.2s, color 0.2s;
+		}
+
+		#container {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		#header {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			padding: 15px 20px;
+			box-sizing: border-box;
+			border-bottom: 1px solid #eee;
+		}
+
+			#header h1 {
+				font-size: 20px;
+				font-weight: 700;
+				margin: 0;
+				flex-grow: 1;
+			}
+
+		#header-buttons {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		#dark_mode_icon {
+			cursor: pointer;
+			width: 24px;
+			height: 24px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 50%;
+			transition: opacity 0.2s;
+		}
+
+			#dark_mode_icon:hover {
+				opacity: 0.7;
+			}
+
+			#dark_mode_icon svg {
+				width: 20px;
+				height: 20px;
+				fill: currentColor;
+			}
+
+		.switch-container {
+			position: relative;
+			display: inline-block;
+			width: 36px;
+			height: 20px;
+			flex-shrink: 0;
+		}
+
+			.switch-container input {
+				opacity: 0;
+				width: 0;
+				height: 0;
+			}
+
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			transition: .4s;
+			border-radius: 34px;
+		}
+
+			.slider:before {
+				position: absolute;
+				content: "";
+				height: 14px;
+				width: 14px;
+				left: 3px;
+				bottom: 3px;
+				background-color: white;
+				transition: .4s;
+				border-radius: 50%;
+			}
+
+		input:checked + .slider {
+			background-color: #E60023;
+		}
+
+			input:checked + .slider:before {
+				transform: translateX(16px);
+			}
+
+		ul {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+			width: 100%;
+		}
+
+		li {
+			display: flex;
+			align-items: center;
+			padding: 12px 20px;
+			border-bottom: 1px solid #eee;
+			font-size: 14px;
+			box-sizing: border-box;
+		}
+
+			li:last-child {
+				border-bottom: none;
+			}
+
+		.text-label {
+			cursor: pointer;
+			flex-grow: 1;
+		}
+
+		#off {
+			text-align: center;
+			padding: 40px 20px;
+			color: #767676;
+		}
+
+			#off svg {
+				fill: #767676;
+				width: 48px;
+				height: 48px;
+				margin-bottom: 10px;
+			}
+
+			#off p {
+				margin: 0;
+				font-size: 16px;
+				font-weight: bold;
+			}
+
+		#options {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1>📌Unpin</h1>
+			<div id="header-buttons">
+				<div id="dark_mode_icon" title="Toggle Dark Mode">
+					<svg viewBox="0 0 24 24">
+						<path d="M12 2a10 10 0 1 0 10 10 10 10 0 0 0-10-10zm0 18V4a8 8 0 0 1 0 16z" />
+					</svg>
+				</div>
+				<label class="switch-container">
+					<input type="checkbox" name="pin_on_top" id="pin_on_top" class="check yt-setting">
+					<span class="slider"></span>
+				</label>
+			</div>
+		</div>
+
+		<input type="checkbox" name="pin_on" id="pin_on" class="check yt-setting" style="display:none;">
+
+		<div id="off" style="display: none;">
+			<label for="pin_on_top" style="cursor: pointer;">
+				<svg viewBox="0 0 24 24">
+					<path d="M12,2C6.5,2,2,6.5,2,12c0,5.5,4.5,10,10,10s10-4.5,10-10C22,6.5,17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8 s8,3.6,8,8S16.4,20,12,20z M9,11.5c-0.8,0-1.5,0.7-1.5,1.5s0.7,1.5,1.5,1.5s1.5-0.7,1.5-1.5S9.8,11.5,9,11.5z M15,11.5 c-0.8,0-1.5,0.7-1.5,1.5s0.7,1.5,1.5,1.5s1.5-0.7,1.5-1.5S15.8,11.5,15,11.5z M10.4,11.5h3.2c0.3,0,0.6-0.3,0.6-0.6 s-0.3-0.6-0.6-0.6h-3.2c-0.3,0-0.6,0.3-0.6,0.6S10.1,11.5,10.4,11.5z M9,11.5c-0.8,0-1.4-0.6-1.4-1.3V1.3C7.6,0.6,8.2,0,9,0 s1.3,0.6,1.3,1.3v8.8C10.4,10.9,9.8,11.5,9,11.5z" />
+				</svg>
+			</label>
+			<p>Unpin is off.</p>
+		</div>
+
+		<div id="options">
+			<ul>
+				<li>
+					<label for="hide_feed" class="text-label">Hide Home Feed</label>
+					<label class="switch-container">
+						<input type="checkbox" name="hide_feed" id="hide_feed" class="check yt-setting">
+						<span class="slider"></span>
+					</label>
+				</li>
+				<li>
+					<label for="hide_related" class="text-label">Hide Related Pins & Ideas</label>
+					<label class="switch-container">
+						<input type="checkbox" name="hide_related" id="hide_related" class="check yt-setting">
+						<span class="slider"></span>
+					</label>
+				</li>
+				<li>
+					<label for="hide_unorganized_ideas" class="text-label">Hide Unorganized Ideas</label>
+					<label class="switch-container">
+						<input type="checkbox" name="hide_unorganized_ideas" id="hide_unorganized_ideas" class="check yt-setting">
+						<span class="slider"></span>
+					</label>
+				</li>
+				<li>
+					<label for="hide_board_suggestions" class="text-label">Hide Board Suggestions</label>
+					<label class="switch-container">
+						<input type="checkbox" name="hide_board_suggestions" id="hide_board_suggestions" class="check yt-setting">
+						<span class="slider"></span>
+					</label>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<script src="popup.js"></script>
+</body>
+</html>
